@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coqueta 💖</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .linea {
+      font-size: 1.3em;
+      margin: 20px 0;
+      white-space: pre-wrap;
+      min-height: 1.5em;
+    }
+
+    .titulo {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #ff69b4;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2em;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #ff85c1;
+    }
+  </style>
+</head>
+<body>
+  <div class="titulo">💞 Para vos Preciosa ;v 💞</div>
+  <audio id="audio" src="coqueta.mp3"></audio>
+  <button id="iniciarBtn">Iniciar 💫</button>
+  <div id="letras"></div>
+
+  <script>
+    const lineas = [
+      "Pensando y viendo las estrellas, pregunté ✨🌌",
+      "Si, en algún lugar, esto se estaría repitiendo 🔁💭",
+      "Si es que, en otro mundo, tal vez nos ganó el deseo 🌍💫",
+      "O si solo fuimos un error del universo ❓🪐",
+      "Jane, bésame ❤️",
+      "Quiero que vuelvas a mis brazos pa' sentirnos eternos como la última vez 🤗⏳",
+      "Quiero confesarte, te extraño, como un loco, te pienso, yo sé que tú también 📝💭💕",
+      "Porfa, ma, ya vuelve conmigo, pero no como amigos como la última vez 🙏💔",
+      "Quiero confesarte, te extraño, como un loco, te pienso, yo sé que tú también 🗣️❤️‍🔥"
+    ];
+
+    const tiempos = [
+      0.0,
+      2.2,
+      5.0,
+      8.0,
+      10.9,
+      13.3,
+      19.9,
+      25.7,
+      32.0
+    ];
+
+    const colores = [
+      "#ff4d4d", "#4dff88", "#ffff4d",
+      "#4da6ff", "#d24dff", "#4dffff",
+      "#999999", "#ffffff", "#ff3333"
+    ];
+
+    const letrasDiv = document.getElementById("letras");
+    const audio = document.getElementById("audio");
+    const iniciarBtn = document.getElementById("iniciarBtn");
+
+    iniciarBtn.addEventListener("click", () => {
+      audio.play();
+      iniciarBtn.style.display = "none";
+
+      tiempos.forEach((inicioLinea, index) => {
+        setTimeout(() => {
+          const contenedor = document.createElement("div");
+          contenedor.className = "linea";
+          contenedor.style.color = colores[index % colores.length];
+          letrasDiv.appendChild(contenedor);
+
+          let texto = lineas[index];
+          let i = 0;
+          const intervalo = setInterval(() => {
+            if (i < texto.length) {
+              contenedor.textContent += texto.charAt(i);
+              i++;
+            } else {
+              clearInterval(intervalo);
+            }
+          }, 30); // Velocidad de escritura
+        }, inicioLinea * 1000);
+      });
+    });
+  </script>
+</body>
+</html>
